@@ -30,25 +30,31 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+$routes->get('/logout', 'AuthController::logout');
 $routes->get('/', 'AuthController::index');
+$routes->addRedirect('login', '/');
 $routes->get('register', 'AuthController::register');
 // Admin
 $routes->group('admin', function($routes)
 {
     // GET
+    // Create user
     $routes->get('/', 'AdminController::index');
     $routes->get('create_user', 'AdminController::create_user');
     $routes->get('create_user/customer', 'AdminController::create_user_customer');
     $routes->get('create_user/seller', 'AdminController::create_user_seller');
-
+    // List User
     $routes->get('list_user', 'AdminController::list_user');
     $routes->get('list_user/customer', 'AdminController::list_user_customer');
     $routes->get('list_user/seller', 'AdminController::list_user_seller');
-
+    // Withdraw
+    $routes->get('withdraw', 'AdminController::withdraw');
+    $routes->get('withdraw/customer', 'AdminController::withdraw_customer');
+    $routes->get('withdraw/seller', 'AdminController::withdraw_seller');
+    // Other
     $routes->get('transaction', 'AdminController::transaction');
     $routes->get('print_card', 'AdminController::print_card');
     $routes->get('add_balance', 'AdminController::add_balance');
-    $routes->get('withdraw', 'AdminController::withdraw');
     // POST
 });
 // End Admin

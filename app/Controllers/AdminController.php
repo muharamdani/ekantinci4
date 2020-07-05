@@ -17,7 +17,6 @@ class AdminController extends BaseController{
         echo view('admin/create_user_seller');
     }
     // POST METHOD
-    // ------------ONGOING
     // Create User end
 
     // List user start
@@ -32,8 +31,21 @@ class AdminController extends BaseController{
         echo view('admin/list_user_seller');
     }
     // Post Method
-    // ------------ONGOING
     // List User end
+
+    // Withdraw start
+    // Get Method
+    public function withdraw(){
+        echo view('admin/withdraw');
+    }
+    public function withdraw_customer(){
+        echo view('admin/withdraw_customer');
+    }
+    public function withdraw_seller(){
+        echo view('admin/withdraw_seller');
+    }
+    // Post Method
+    // Withdraw end
     public function transaction(){
         echo view('admin/transaction');
     }
@@ -41,9 +53,6 @@ class AdminController extends BaseController{
         echo view('admin/print_card');
     }
     public function add_balance(){
-        return "add_balance";
-    }
-    public function withdraw(){
-        echo view('admin/withdraw');
+        echo view('admin/add_balance');
     }
 }

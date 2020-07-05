@@ -21,7 +21,7 @@
                     Total saldo anda
                 </div>
                 <div class="card-body card-body-2">
-                    <h5 class="card-title">sum-number-of-ballance</h5>
+                    <h5 class="card-title">{sum-number-of-ballance}</h5>
                 </div>
             </div>
         </div>

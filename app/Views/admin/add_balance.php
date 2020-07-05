@@ -1,6 +1,6 @@
 <?= $this->extend('templates/admin_template') ?>
 <?= $this->section('rolename') ?>
-    <h1>Cetak kartu</h1>
+    <h1>Tambah saldo</h1>
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="container custom-form">
@@ -31,7 +31,7 @@
           <td>Edit Phoe</td>
           <td>Edit Balance</td>
           <td>
-              <a href="<?= base_url('admin/list_user/seller/delete/id'); ?>"><button class="btn btn-success">Cetak</button></a>
+              <a href="<?= base_url('admin/add_balance/id'); ?>"><button class="btn btn-primary">Tambah saldo</button></a>
           </td>
         </tr>
       </tbody>

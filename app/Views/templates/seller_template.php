@@ -31,7 +31,6 @@
                 <a href="<?= base_url('seller/transaction_history'); ?>"><li class="list-group-item">Riwayat transaksi</li></a>
                 <a href="<?= base_url('seller/balance_history'); ?>"><li class="list-group-item">Riwayat saldo</li></a>
                 <a href="<?= base_url('seller/change_profile'); ?>"><li class="list-group-item">Rubah profile</li></a>
-                <a href="<?= base_url('seller/print_card'); ?>"><li class="list-group-item">Cetak kartu</li></a>
             </ul>
         </div>
     </div>
@@ -47,7 +46,6 @@
                             <li class="nav-item hidden-navitems" role="presentation"><a class="nav-link active" href="<?= base_url('seller/transaction_history'); ?>">Riwayat transaksi</a></li>
                             <li class="nav-item hidden-navitems" role="presentation"><a class="nav-link active" href="<?= base_url('seller/balance_history'); ?>">Riwayat saldo</a></li>
                             <li class="nav-item hidden-navitems" role="presentation"><a class="nav-link active" href="<?= base_url('seller/change_profile'); ?>">Rubah profile</a></li>
-                            <li class="nav-item hidden-navitems" role="presentation"><a class="nav-link active" href="<?= base_url('seller/print_card'); ?>">Cetak kartu</a></li>
                         </ul>
                     </div>
                 </div>

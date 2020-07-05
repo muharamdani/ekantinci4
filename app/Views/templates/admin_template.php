@@ -24,7 +24,7 @@
                 <a href="<?= base_url('logout'); ?>"><li class="list-group-item">Logout</li></a>
             </ul>
             <hr>
-            <ul class="list-group">
+            <ul class="list-group list-group-manage-user">
                 <li class="list-group-item disabled">Manage users</li>
                 <li>
                     <a class="collapsed list-group-item" data-toggle="collapse" aria-expanded="false" href="#submenu1">Buat user<i class="fa fa-arrow-circle-down ml-2"></i></a>
@@ -45,7 +45,7 @@
                 <a href="<?= base_url('admin/add_balance'); ?>"><li class="list-group-item">Tambah saldo</li></a>
                 <li>
                     <a class="collapsed list-group-item" data-toggle="collapse" aria-expanded="false" href="#submenu3">Tarik saldo<i class="fa fa-arrow-circle-down ml-2"></i></a>
-                    <ul class="list-unstyled collapse" id="submenu3" aria-expanded="false">
+                    <ul class="list-unstyled collapse mb-4" id="submenu3" aria-expanded="false">
                         <a href="<?= base_url('admin/withdraw/customer'); ?>"><li class="list-group-item ml-4">Pelanggan</li></a>
                         <a href="<?= base_url('admin/withdraw/seller'); ?>"><li class="list-group-item ml-4">Penjual</li></a>
                     </ul>
