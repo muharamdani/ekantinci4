@@ -20,9 +20,17 @@
                     <h2 class="text-info font-weight-light"><i class="fa fa-diamond"></i>E-kantin</h2>
                     <p>Make canteen transaction easier</p>
                     <form>
-                        <div class="form-group"><label class="text-secondary">Username</label><input class="form-control" type="text" required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}$" autofocus></div>
-                        <div class="form-group"><label class="text-secondary">Password</label><input class="form-control" type="password" required=""></div><button class="btn btn-info mt-2" type="submit">Log In</button></form>
-                    <p class="mt-3 mb-0"><a class="text-info small" href="<?= base_url("register"); ?>">Doesen't have an account? Registr now!</a></p>
+                        <div class="form-group">
+                            <label class="text-secondary">Username</label>
+                            <input class="form-control" type="text" required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}$" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-secondary">Password</label>
+                            <input class="form-control" type="password" required="">
+                        </div>
+                        <button class="btn btn-info mt-2" type="submit">Log In</button>
+                    </form>
+                    <!-- <p class="mt-3 mb-0"><a class="text-info small" href="">Doesen't have an account? Registr now!</a></p> -->
                 </div>
             </div>
             <div class="col-lg-6 d-flex align-items-end aladin" id="bg-block">

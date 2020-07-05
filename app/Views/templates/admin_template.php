@@ -19,8 +19,8 @@
             <p>Welcome back,<br>{username}</p>
         </div>
         <div class="sidebar-bottom">
-            <ul class="list-group">
-                <a href="<?= base_url('admin'); ?>"><li class="list-group-item mt-2">Dashboard</li></a>
+            <ul class="list-group my-1">
+                <a href="<?= base_url('admin'); ?>"><li class="list-group-item">Dashboard</li></a>
                 <a href="<?= base_url('logout'); ?>"><li class="list-group-item">Logout</li></a>
             </ul>
             <hr>
