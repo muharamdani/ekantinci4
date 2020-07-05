@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>ekantin</title>
+    <link rel="stylesheet" href="<?= base_url("assets/bootstrap/css/bootstrap.min.css"); ?>">
+    <link rel="stylesheet" href="<?= base_url("assets/fonts/font-awesome.min.css"); ?>">
+    <link rel="stylesheet" href="<?= base_url("assets/fonts/ionicons.min.css"); ?>">
+    <link rel="stylesheet" href="<?= base_url("assets/css/Collapsible-sidebar-left-or-right--Content-overlay.css"); ?>">
+    <link rel="stylesheet" href="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.css">
+    <link rel="stylesheet" href="<?= base_url("assets/css/styles.css"); ?>">
+</head>
+
+<body>
+    <div id="mySidebar" class="sidebar">
+        <div class="sidebar-top text-white">
+            <img src="<?= base_url("assets/img/avatar.png"); ?>" alt="" class="userphoto">
+            <p>Welcome back,<br>{username}</p>
+        </div>
+        <div class="sidebar-bottom">
+            <ul class="list-group">
+                <li class="list-group-item mt-2">Dashboard</li>
+                <li class="list-group-item">Logout</li>
+            </ul>
+            <hr>
+            <ul class="list-group">
+                <li class="list-group-item disabled">Manage users</li>
+                <li class="list-group-item">Lakukan transaksi</li>
+                <li class="list-group-item">Riwayat transaksi</li>
+                <li class="list-group-item">Rubah profile</li>
+            </ul>
+        </div>
+    </div>
+    <div id="main" class="d-flex flex-column justify-content-between">
+        <div class="topnya">
+            <nav class="navbar navbar-dark navbar-expand-md">
+                <div class="container"><a class="navbar-brand" href="#">Ekantin</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse"
+                        id="navcol-1">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Logout</a></li>
+                            <li class="nav-item hidden-navitems" role="presentation"><a class="nav-link active" href="#">Dashboard</a></li>
+                            <li class="nav-item hidden-navitems" role="presentation"><a class="nav-link active" href="#">Lakukan transaksi</a></li>
+                            <li class="nav-item hidden-navitems" role="presentation"><a class="nav-link active" href="#">Riwayat transaksi</a></li>
+                            <li class="nav-item hidden-navitems" role="presentation"><a class="nav-link active" href="#">Rubah profile</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Content -->
+            <?= $this->renderSection('content') ?>
+             <!-- End Content -->
+        </div>
+        <div class="bottomnya">
+            <div class="footer">
+                <h8>Copyright Ramdani</h8>
+            </div>
+        </div>
+    </div>
+    <script src="<?= base_url("assets/js/jquery.min.js"); ?>"></script>
+    <script src="<?= base_url("assets/bootstrap/js/bootstrap.min.js"); ?>"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+    <script src="<?= base_url("assets/js/Collapsible-sidebar-left-or-right--Content-overlay.js"); ?>"></script>
+    <script src="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.js"></script>
+</body>
+
+</html>
