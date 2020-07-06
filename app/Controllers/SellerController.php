@@ -5,14 +5,17 @@ class SellerController extends BaseController{
         $data['username'] = "Babeh";
         echo view('seller/index', $data);
     }
+    public function transaction(){
+        echo view('seller/transaction');
+    }
     public function transaction_history(){
-        return "edit";
+        echo view('seller/transaction_history');
     }
     public function balance_history(){
         return "edit";
     }
     public function change_profile(){
-        return "edit";
+        echo view('seller/change_profile');
     }
     public function print_card(){
         return "edit";

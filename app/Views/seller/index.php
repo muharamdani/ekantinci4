@@ -1,8 +1,8 @@
 <?= $this->extend('templates/seller_template') ?>
+<?= $this->section('rolename') ?>
+    <h1>Selamat datang {username}</h1>
+<?= $this->endSection() ?>
 <?= $this->section('content') ?>
-<div class="rolename text-center">
-    <h1>Selamat datang di kantin <?= $username; ?></h1>
-</div>
 <div class="container-fluid">
     <div class="row mt-4 text-white">
         <div class="col-lg mb-2">
@@ -31,15 +31,15 @@
 <div class="container">
     <div class="row justify-content-center text-center">
         <div class="col-xl-3 mb-3">
-            <button class="btn-quick1">Lakukan transaksi</button>
+            <a href="<?= base_url('seller/transaction'); ?>"><button class="btn-quick1">Lakukan transaksi</button></a>
         </div>
         <div class="col-xl-3 mb-3">
-            <button class="btn-quick1">Riwayat transaksi</button>
+            <a href="<?= base_url('seller/transaction_history'); ?>"><button class="btn-quick1">Riwayat transaksi</button></a>
         </div>
     </div>
     <div class="row text-center mb-3">
         <div class="col-lg">
-            <button class="btn-quick1">Rubah profile</button>
+            <a href="<?= base_url('seller/change_profile'); ?>"><button class="btn-quick1">Rubah profile</button></a>
         </div>
     </div>
 </div>

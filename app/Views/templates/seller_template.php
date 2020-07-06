@@ -28,8 +28,8 @@
             <hr>
             <ul class="list-group">
                 <li class="list-group-item disabled">Manage users</li>
+                <a href="<?= base_url('seller/transaction'); ?>"><li class="list-group-item">Lakukan transaksi</li></a>
                 <a href="<?= base_url('seller/transaction_history'); ?>"><li class="list-group-item">Riwayat transaksi</li></a>
-                <a href="<?= base_url('seller/balance_history'); ?>"><li class="list-group-item">Riwayat saldo</li></a>
                 <a href="<?= base_url('seller/change_profile'); ?>"><li class="list-group-item">Rubah profile</li></a>
             </ul>
         </div>
@@ -43,15 +43,20 @@
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item" role="presentation"><a class="nav-link active" href="<?= base_url('logout'); ?>">Logout</a></li>
                             <li class="nav-item hidden-navitems" role="presentation"><a class="nav-link active" href="<?= base_url('seller'); ?>">Dashboard</a></li>
+                            <li class="nav-item hidden-navitems" role="presentation"><a class="nav-link active" href="<?= base_url('seller/transaction_history'); ?>">Lakukan transaksi</a></li>
                             <li class="nav-item hidden-navitems" role="presentation"><a class="nav-link active" href="<?= base_url('seller/transaction_history'); ?>">Riwayat transaksi</a></li>
-                            <li class="nav-item hidden-navitems" role="presentation"><a class="nav-link active" href="<?= base_url('seller/balance_history'); ?>">Riwayat saldo</a></li>
                             <li class="nav-item hidden-navitems" role="presentation"><a class="nav-link active" href="<?= base_url('seller/change_profile'); ?>">Rubah profile</a></li>
                         </ul>
                     </div>
                 </div>
             </nav>
             <!-- Content -->
+            <div class="rolename text-center">
+                <?= $this->renderSection('rolename') ?>
+            </div>
+            <section class="middle">
             <?= $this->renderSection('content') ?>
+            </section>
              <!-- End Content -->
         </div>
         <div class="bottomnya">

@@ -63,9 +63,10 @@ $routes->group('admin', function($routes)
 $routes->group('seller', function($routes)
 {
     $routes->get('/', 'SellerController::index');
+    $routes->get('transaction', 'SellerController::transaction');
     $routes->get('transaction_history', 'SellerController::transaction_history');
     $routes->get('balance_history', 'SellerController::balance_history');
-    $routes->get('change_profile', 'SellerController::change_profilen');
+    $routes->get('change_profile', 'SellerController::change_profile');
     $routes->get('print_card', 'SellerController::print_card');
 });
 // End Seller
