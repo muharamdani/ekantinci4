@@ -73,6 +73,14 @@ $routes->group('seller', function($routes)
 
 // Customer
 $routes->get('customer/', 'CustomerController::index');
+$routes->group('customer', function($routes)
+{
+    $routes->get('/', 'CustomerController::index');
+    $routes->get('transaction_history', 'CustomerController::transaction_history');
+    $routes->get('balance_history', 'CustomerController::balance_history');
+    $routes->get('change_profile', 'CustomerController::change_profile');
+    $routes->get('print_card', 'CustomerController::print_card');
+});
 // End Customer
 
 /**
