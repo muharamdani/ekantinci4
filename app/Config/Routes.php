@@ -62,24 +62,27 @@ $routes->group('admin', function($routes)
 // Seller
 $routes->group('seller', function($routes)
 {
+    // GET
     $routes->get('/', 'SellerController::index');
     $routes->get('transaction', 'SellerController::transaction');
     $routes->get('transaction_history', 'SellerController::transaction_history');
     $routes->get('balance_history', 'SellerController::balance_history');
     $routes->get('change_profile', 'SellerController::change_profile');
     $routes->get('print_card', 'SellerController::print_card');
+    // POST
 });
 // End Seller
 
 // Customer
-$routes->get('customer/', 'CustomerController::index');
 $routes->group('customer', function($routes)
 {
+    // GET
     $routes->get('/', 'CustomerController::index');
     $routes->get('transaction_history', 'CustomerController::transaction_history');
     $routes->get('balance_history', 'CustomerController::balance_history');
     $routes->get('change_profile', 'CustomerController::change_profile');
     $routes->get('print_card', 'CustomerController::print_card');
+    // POST
 });
 // End Customer
 

@@ -1,6 +1,6 @@
 <?= $this->extend('templates/admin_template') ?>
 <?= $this->section('rolename') ?>
-    <h1>Selamat datang <?= $username; ?></h1>
+    <h1>Selamat datang Admin</h1>
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="container-fluid">
@@ -11,7 +11,7 @@
                     Total Akun Penjual
                 </div>
                 <div class="card-body card-body-1">
-                    <h5 class="card-title">{sum-number-of-account}</h5>
+                    <h5 class="card-title"><?= $countseller; ?></h5>
                 </div>
             </div>
         </div>
@@ -21,24 +21,24 @@
                     Total Akun Pelanggan
                 </div>
                 <div class="card-body card-body-2">
-                    <h5 class="card-title">sum-number-of-account</h5>
+                    <h5 class="card-title"><?= $countcustomer; ?></h5>
                 </div>
             </div>
         </div>
         <div class="col-lg mb-2">
             <div class="card text-center">
                 <div class="card-header card-header-3">
-                    Total Saldo Siswa
+                    Total Saldo Penjual
                 </div>
                 <div class="card-body card-body-3">
-                    <h5 class="card-title">{sum-number-of-ballance}</h5>
+                    <h5 class="card-title"><?= $sellerbalance; ?></h5>
                 </div>
             </div>
         </div>
         <div class="col-lg mb-2">
             <div class="card text-center">
                 <div class="card-header card-header-4">
-                    Total Saldo Penjual
+                    Total Saldo Pelanggan
                 </div>
                 <div class="card-body card-body-4">
                     <h5 class="card-title">{sum-number-of-ballance}</h5>

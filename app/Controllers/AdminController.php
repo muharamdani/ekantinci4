@@ -1,8 +1,20 @@
 <?php namespace App\Controllers;
 
+use App\Models\CustomersModel;
+use App\Models\UsersModel;
+
 class AdminController extends BaseController{
+    public function __construct(){
+        $this->user = new UsersModel();
+        $this->customer = new CustomersModel();
+    }
     public function index(){
-        $data['username'] = "Admin";
+        $user = $this->user->findAll();
+        $countseller = ($this->user->countAllResults())-1;
+        $countcustomer = $this->customer->countAllResults();
+        $sellerbalance = $this->user->countAllResults('balance');
+        
+        $data = ['countseller' => $countseller, 'countcustomer'=>$countcustomer, 'sellerbalance'=>$sellerbalance];
         echo view('admin/index', $data);
     }
     // Create user start
