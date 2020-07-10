@@ -41,7 +41,7 @@
                     Total Saldo Pelanggan
                 </div>
                 <div class="card-body card-body-4">
-                    <h5 class="card-title">{sum-number-of-ballance}</h5>
+                    <h5 class="card-title"><?= $customerbalance ?></h5>
                 </div>
             </div>
         </div>

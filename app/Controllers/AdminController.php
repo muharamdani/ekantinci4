@@ -9,12 +9,20 @@ class AdminController extends BaseController{
         $this->customer = new CustomersModel();
     }
     public function index(){
-        $user = $this->user->findAll();
-        $countseller = ($this->user->countAllResults())-1;
-        $countcustomer = $this->customer->countAllResults();
-        $sellerbalance = $this->user->countAllResults('balance');
-        
-        $data = ['countseller' => $countseller, 'countcustomer'=>$countcustomer, 'sellerbalance'=>$sellerbalance];
+        // users
+        $countseller = $this->user->selectCount('id')->first();
+        $countseller = $countseller['id'] - 1;
+        $sellerbalance = $this->user->selectSum('balance')->first();
+        $sellerbalance = $sellerbalance['balance'];
+        // customers
+        $countcustomer = $this->customer->selectCount('id')->first();
+        $countcustomer = $countcustomer['id'];
+        $customerbalance = $this->customer->selectSum('balance')->first();
+        $customerbalance = $customerbalance['balance'];
+        $data = ['countseller' => $countseller,
+                'sellerbalance'=>$sellerbalance,
+                'countcustomer' => $countcustomer,
+                'customerbalance'=>$customerbalance,];
         echo view('admin/index', $data);
     }
     // Create user start
@@ -37,10 +45,14 @@ class AdminController extends BaseController{
         echo view('admin/list_user');
     }
     public function list_user_customer(){
+        
         echo view('admin/list_user_customer');
     }
     public function list_user_seller(){
-        echo view('admin/list_user_seller');
+        $userlist = $this->user->findAll();
+        $data = ['userlist'=>$userlist];
+        echo view('admin/list_user_seller', $data);
+        
     }
     // Post Method
     // List User end
