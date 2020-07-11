@@ -57,6 +57,18 @@ class AdminController extends BaseController{
     // Post Method
     // List User end
 
+    // Update User Start
+    // Get Method
+    public function update_seller(){
+        echo view('admin/update_seller');
+    }
+    public function update_customer(){
+        echo view('admin/update_customer');
+    }
+    // Post Method
+    // Update User End
+    
+
     // Withdraw start
     // Get Method
     public function withdraw(){

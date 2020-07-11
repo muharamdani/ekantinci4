@@ -47,6 +47,9 @@ $routes->group('admin', function($routes)
     $routes->get('list_user', 'AdminController::list_user');
     $routes->get('list_user/customer', 'AdminController::list_user_customer');
     $routes->get('list_user/seller', 'AdminController::list_user_seller');
+    // Update USer
+    $routes->get('update/customer/id', 'AdminController::update_customer');
+    $routes->get('update/seller/id', 'AdminController::update_seller');
     // Withdraw
     $routes->get('withdraw', 'AdminController::withdraw');
     $routes->get('withdraw/customer', 'AdminController::withdraw_customer');

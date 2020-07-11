@@ -30,8 +30,8 @@
           <td><?= $result['class'];?></td>
           <td><?= $result['balance'];?></td>
           <td>
-              <a href="<?= base_url('admin/list_user/seller/delete/id'); ?>"><button class="btn btn-primary">Update</button></a>
-              <a href="<?= base_url('admin/list_user/seller/update/id'); ?>"><button class="btn btn-danger">DELETE</button></a>
+              <a href="<?= base_url('admin/update/customer/id'); ?>"><button class="btn btn-primary">Update</button></a>
+              <a href="<?= base_url('admin/update/customer/id'); ?>"><button class="btn btn-danger">DELETE</button></a>
           </td>
         </tr>
       </tbody>
