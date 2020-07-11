@@ -16,26 +16,26 @@
           <th scope="col">NIS</th>
           <th scope="col">Nama</th>
           <th scope="col">Kelas</th>
-          <th scope="col">Telepon</th>
           <th scope="col">Saldo</th>
           <th scope="col">Aksi</th>
         </tr>
       </thead>
+      <?php foreach($userlist as $result): ?>
       <tbody>
         <tr>
           <th scope="row">1</th>
-          <td>Edit ID</td>
-          <td>Edit NIS</td>
-          <td>Edit Name</td>
-          <td>Edit Class</td>
-          <td>Edit Phoe</td>
-          <td>Edit Balance</td>
+          <td><?= $result['id'];?></td>
+          <td><?= $result['nis'];?></td>
+          <td><?= $result['full_name'];?></td>
+          <td><?= $result['class'];?></td>
+          <td><?= $result['balance'];?></td>
           <td>
               <a href="<?= base_url('admin/list_user/seller/delete/id'); ?>"><button class="btn btn-primary">Update</button></a>
               <a href="<?= base_url('admin/list_user/seller/update/id'); ?>"><button class="btn btn-danger">DELETE</button></a>
           </td>
         </tr>
       </tbody>
+      <?php endforeach; ?>
     </table>
   </div>
 </div>

@@ -45,14 +45,14 @@ class AdminController extends BaseController{
         echo view('admin/list_user');
     }
     public function list_user_customer(){
-        
-        echo view('admin/list_user_customer');
+        $userlist = $this->customer->findAll();
+        $data = ['userlist'=>$userlist];
+        echo view('admin/list_user_customer', $data);
     }
     public function list_user_seller(){
         $userlist = $this->user->findAll();
         $data = ['userlist'=>$userlist];
         echo view('admin/list_user_seller', $data);
-        
     }
     // Post Method
     // List User end
