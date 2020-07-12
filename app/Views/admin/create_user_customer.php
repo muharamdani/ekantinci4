@@ -8,13 +8,8 @@
         <div class="form-group">
             <input type="number" name="nis" class="form-control shadow-none" placeholder="NIS" autofocus>
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <input type="text" name="fname" class="form-control shadow-none" placeholder="Nama depan">
-            </div>
-            <div class="form-group col-md-6">
-                <input type="text" name="lname" class="form-control shadow-none" placeholder="Nama belakang">
-            </div>
+        <div class="form-group">
+            <input type="text" name="name" class="form-control shadow-none" placeholder="Nama Lengkap" autofocus>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -26,9 +21,6 @@
         </div>
         <div class="form-group">
             <input type="text" name="class" class="form-control shadow-none" placeholder="Kelas">
-        </div>
-        <div class="form-group">
-            <input type="number" name="phnumber" class="form-control shadow-none" placeholder="Nomer telepon">
         </div>
         <div class="form-group">
             <input type="number" name="balance" class="form-control shadow-none" placeholder="Saldo awal">

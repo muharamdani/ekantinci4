@@ -6,7 +6,7 @@
 <div class="container">
     <form class="custom-form">
         <div class="form-group">
-            <input type="text" name="username" class="form-control shadow-none" placeholder="Username" autofocus>
+            <input type="text" name="username" class="form-control shadow-none" value="<?= $data['username']; ?>" placeholder="Username" autofocus>
         </div>
         <div class="form-group">
             <input type="password" name="password" class="form-control shadow-none" placeholder="Password">

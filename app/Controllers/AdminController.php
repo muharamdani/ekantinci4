@@ -7,6 +7,8 @@ class AdminController extends BaseController{
     public function __construct(){
         $this->user = new UsersModel();
         $this->customer = new CustomersModel();
+        $this->listcustomer = $this->customer->findalluser();
+        $this->listseller = $this->user->findalluser();
     }
     public function index(){
         // users
@@ -26,7 +28,6 @@ class AdminController extends BaseController{
         echo view('admin/index', $data);
     }
     // Create user start
-    // GET METHOD
     public function create_user(){
         echo view('admin/create_user');
     }
@@ -36,59 +37,57 @@ class AdminController extends BaseController{
     public function create_user_seller(){
         echo view('admin/create_user_seller');
     }
-    // POST METHOD
-    // Create User end
+    // Create User End
 
     // List user start
-    // Get Method
     public function list_user(){
         echo view('admin/list_user');
     }
     public function list_user_customer(){
-        $userlist = $this->customer->findAll();
-        $data = ['userlist'=>$userlist];
+        $data = $this->listcustomer;
         echo view('admin/list_user_customer', $data);
     }
     public function list_user_seller(){
-        $userlist = $this->user->findAll();
-        $data = ['userlist'=>$userlist];
+        $data = $this->listseller;
         echo view('admin/list_user_seller', $data);
     }
-    // Post Method
-    // List User end
+    // List User End
 
     // Update User Start
-    // Get Method
-    public function update_seller(){
-        echo view('admin/update_seller');
+    public function update_seller($id){
+        $data = $this->customer->finduserid($id);
+        echo view('admin/update_seller', $data);
     }
-    public function update_customer(){
-        echo view('admin/update_customer');
+    public function update_customer($id){
+        $data = $this->customer->finduserid($id);
+        echo view('admin/update_customer', $data);
     }
-    // Post Method
     // Update User End
-    
 
     // Withdraw start
-    // Get Method
     public function withdraw(){
         echo view('admin/withdraw');
     }
     public function withdraw_customer(){
-        echo view('admin/withdraw_customer');
+        $data = $this->listcustomer;
+        echo view('admin/withdraw_customer', $data);
     }
     public function withdraw_seller(){
-        echo view('admin/withdraw_seller');
+        $data = $this->listseller;
+        echo view('admin/withdraw_seller', $data);
     }
-    // Post Method
     // Withdraw end
+    
+    // Other
     public function transaction(){
         echo view('admin/transaction');
     }
     public function print_card(){
-        echo view('admin/print_card');
+        $data = $this->listcustomer;
+        echo view('admin/print_card', $data);
     }
     public function add_balance(){
-        echo view('admin/add_balance');
+        $data = $this->listcustomer;
+        echo view('admin/add_balance', $data);
     }
 }

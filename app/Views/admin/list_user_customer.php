@@ -20,7 +20,7 @@
           <th scope="col">Aksi</th>
         </tr>
       </thead>
-      <?php foreach($userlist as $result): ?>
+      <?php foreach($data as $result): ?>
       <tbody>
         <tr>
           <th scope="row">1</th>
@@ -30,8 +30,8 @@
           <td><?= $result['class'];?></td>
           <td><?= $result['balance'];?></td>
           <td>
-              <a href="<?= base_url('admin/update/customer/id'); ?>"><button class="btn btn-primary">Update</button></a>
-              <a href="<?= base_url('admin/update/customer/id'); ?>"><button class="btn btn-danger">DELETE</button></a>
+              <a href="<?= base_url('admin/update/customer'); echo '/', $result['id']; ?>"><button class="btn btn-primary">Update</button></a>
+              <a href="<?= base_url('admin/update/customer'); echo '/', $result['id']; ?>"><button class="btn btn-danger">DELETE</button></a>
           </td>
         </tr>
       </tbody>
