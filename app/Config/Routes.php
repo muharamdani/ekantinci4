@@ -43,6 +43,8 @@ $routes->group('admin', function($routes)
     $routes->get('create_user', 'AdminController::create_user');
     $routes->get('create_user/customer', 'AdminController::create_user_customer');
     $routes->get('create_user/seller', 'AdminController::create_user_seller');
+    // POST
+    $routes->post('create_user/seller/process', 'AdminController::create_seller_process');
     // List User
     $routes->get('list_user', 'AdminController::list_user');
     $routes->get('list_user/customer', 'AdminController::list_user_customer');
@@ -58,7 +60,6 @@ $routes->group('admin', function($routes)
     $routes->get('transaction', 'AdminController::transaction');
     $routes->get('print_card', 'AdminController::print_card');
     $routes->get('add_balance', 'AdminController::add_balance');
-    // POST
 });
 // End Admin
 

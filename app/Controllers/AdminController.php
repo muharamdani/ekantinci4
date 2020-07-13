@@ -35,7 +35,30 @@ class AdminController extends BaseController{
         echo view('admin/create_user_customer');
     }
     public function create_user_seller(){
-        echo view('admin/create_user_seller');
+        session();
+        $validation = \Config\Services::validation();
+        $data = ['validation'=>$validation];
+        return view('admin/create_user_seller', $data);
+        // dd($validation);
+    }
+    public function create_seller_process(){
+        if(!$this->validate([
+            'username' => 'required|min_length[3]',
+            'password' => 'required|min_length[5]',
+            'password_confirm'=>'required|matches[password]'
+        ])){
+            $validation = \Config\Services::validation();
+            return redirect()->to('/admin/create_user/seller')->withInput()->with('validation',$validation);
+        }
+        $result = $this->request->getVar();
+        $data = [
+            'username' => $result['username'],
+            'password' => $result['password'],
+            'role' => "seller",
+            'balance' => 0,
+        ];
+        $this->user->save($data);
+        return redirect()->to('/admin/list_user/seller');
     }
     // Create User End
 
@@ -55,7 +78,7 @@ class AdminController extends BaseController{
 
     // Update User Start
     public function update_seller($id){
-        $data = $this->customer->finduserid($id);
+        $data = $this->user->finduserid($id);
         echo view('admin/update_seller', $data);
     }
     public function update_customer($id){

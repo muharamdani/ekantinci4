@@ -18,17 +18,19 @@
           <th scope="col">Aksi</th>
         </tr>
       </thead>
+      <?php $i=1; foreach($data as $result): ?>
       <tbody>
         <tr>
-          <th scope="row">1</th>
-          <td>Edit ID</td>
-          <td>Edit Username</td>
-          <td>Edit Balance</td>
+          <th scope="row"><?= $i++ ?></th>
+          <td><?= $result['id']; ?></td>
+          <td><?= $result['username']; ?></td>
+          <td><?= $result['balance']; ?></td>
           <td>
-              <a href="<?= base_url('admin/withdraw/customer/id'); ?>"><button class="btn btn-primary">Tarik</button></a>
+              <a href="<?= base_url('admin/withdraw/seller'); echo '/', $result['id']; ?>"><button class="btn btn-primary">Tarik</button></a>
           </td>
         </tr>
       </tbody>
+      <?php endforeach; ?>
     </table>
   </div>
 </div>
