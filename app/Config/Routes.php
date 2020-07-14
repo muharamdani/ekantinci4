@@ -43,7 +43,6 @@ $routes->group('admin', function($routes)
     $routes->get('create_user', 'AdminController::create_user');
     $routes->get('create_user/customer', 'AdminController::create_user_customer');
     $routes->get('create_user/seller', 'AdminController::create_user_seller');
-    // POST
     $routes->post('create_user/seller/process', 'AdminController::create_seller_process');
     // List User
     $routes->get('list_user', 'AdminController::list_user');
@@ -52,6 +51,9 @@ $routes->group('admin', function($routes)
     // Update USer
     $routes->get('update/customer/(:num)', 'AdminController::update_customer/$1');
     $routes->get('update/seller/(:num)', 'AdminController::update_seller/$1');
+    $routes->post('update/seller/process','AdminController::update_seller_process');
+    // Delete User
+    $routes->get('delete/seller/(:num)', 'AdminController::delete_seller/$1');
     // Withdraw
     $routes->get('withdraw', 'AdminController::withdraw');
     $routes->get('withdraw/customer', 'AdminController::withdraw_customer');

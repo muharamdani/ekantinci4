@@ -25,17 +25,16 @@ class AdminController extends BaseController{
                 'sellerbalance'=>$sellerbalance,
                 'countcustomer' => $countcustomer,
                 'customerbalance'=>$customerbalance,];
-        echo view('admin/index', $data);
+        return view('admin/index', $data);
     }
     // Create user start
     public function create_user(){
-        echo view('admin/create_user');
+        return view('admin/create_user');
     }
     public function create_user_customer(){
-        echo view('admin/create_user_customer');
+        return view('admin/create_user_customer');
     }
     public function create_user_seller(){
-        session();
         $validation = \Config\Services::validation();
         $data = ['validation'=>$validation];
         return view('admin/create_user_seller', $data);
@@ -58,59 +57,79 @@ class AdminController extends BaseController{
             'balance' => 0,
         ];
         $this->user->save($data);
+        session()->setFlashdata('success_create','Data berhasil ditambahkan');
         return redirect()->to('/admin/list_user/seller');
     }
     // Create User End
 
     // List user start
     public function list_user(){
-        echo view('admin/list_user');
+        return view('admin/list_user');
     }
     public function list_user_customer(){
         $data = $this->listcustomer;
-        echo view('admin/list_user_customer', $data);
+        return view('admin/list_user_customer', $data);
     }
     public function list_user_seller(){
         $data = $this->listseller;
-        echo view('admin/list_user_seller', $data);
+        return view('admin/list_user_seller', $data);
     }
     // List User End
 
     // Update User Start
     public function update_seller($id){
         $data = $this->user->finduserid($id);
-        echo view('admin/update_seller', $data);
+        return view('admin/update_seller', $data);
+    }
+    public function update_seller_process(){
+        $result = $this->request->getVar();
+        $data = [
+            'username' =>$result['username'],
+            'password' =>$result['password']
+        ];
+        
     }
     public function update_customer($id){
         $data = $this->customer->finduserid($id);
-        echo view('admin/update_customer', $data);
+        return view('admin/update_customer', $data);
     }
     // Update User End
+    // Delete User
+    public function delete_seller($id){
+        if($id == 1){
+            session()->setFlashdata('error_admin','Cannot delete user admin!');
+            return redirect()->to('/admin/list_user/seller');
+        }
+        $this->user->delete($id);
+        session()->setFlashdata('delete_success','Delete user success!');
+        return redirect()->to('/admin/list_user/seller');
+    }
+    // Delete User End
 
     // Withdraw start
     public function withdraw(){
-        echo view('admin/withdraw');
+        return view('admin/withdraw');
     }
     public function withdraw_customer(){
         $data = $this->listcustomer;
-        echo view('admin/withdraw_customer', $data);
+        return view('admin/withdraw_customer', $data);
     }
     public function withdraw_seller(){
         $data = $this->listseller;
-        echo view('admin/withdraw_seller', $data);
+        return view('admin/withdraw_seller', $data);
     }
     // Withdraw end
     
     // Other
     public function transaction(){
-        echo view('admin/transaction');
+        return view('admin/transaction');
     }
     public function print_card(){
         $data = $this->listcustomer;
-        echo view('admin/print_card', $data);
+        return view('admin/print_card', $data);
     }
     public function add_balance(){
         $data = $this->listcustomer;
-        echo view('admin/add_balance', $data);
+        return view('admin/add_balance', $data);
     }
 }
