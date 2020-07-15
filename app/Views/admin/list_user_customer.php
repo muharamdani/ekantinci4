@@ -4,9 +4,15 @@
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="container custom-form">
-    <form action="" class="mb-3">
-        <input type="text" name="" placeholder="Search" autofocus>
-    </form>
+  <form action="" class="mb-3">
+      <input type="text" name="" placeholder="Search" autofocus>
+  </form>
+  <?php if(session()->getFlashdata('success_create')): ?>
+    <div class="alert alert-success" role="alert"><?= session()->getFlashdata('success_create') ?></div>
+  <?php endif; ?>
+  <?php if(session()->getFlashdata('delete_success')): ?>
+    <div class="alert alert-success" role="alert"><?= session()->getFlashdata('delete_success') ?></div>
+  <?php endif; ?>
   <div class="table-responsive">
     <table class="table text-center">
       <thead class="thead-dark">
@@ -31,7 +37,7 @@
           <td><?= $result['balance'];?></td>
           <td>
               <a href="<?= base_url('admin/update/customer'); echo '/', $result['id']; ?>"><button class="btn btn-primary">Update</button></a>
-              <a href="<?= base_url('admin/update/customer'); echo '/', $result['id']; ?>"><button class="btn btn-danger">DELETE</button></a>
+              <a href="<?= base_url('admin/delete/customer'); echo '/', $result['id']; ?>"><button class="btn btn-danger">DELETE</button></a>
           </td>
         </tr>
       </tbody>

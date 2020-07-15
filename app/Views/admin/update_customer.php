@@ -12,14 +12,11 @@
             <input type="text" name="name" class="form-control shadow-none" value="<?= $data['full_name']; ?>" placeholder="Nama Lengkap" autofocus>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
                 <input type="text" name="username" class="form-control shadow-none" value="<?= $data['username']; ?>" placeholder="Username">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
                 <input type="password" name="password" class="form-control shadow-none" placeholder="Password">
-            </div>
-            <div class="form-group col-md-4">
-                <input type="password" name="repeat-password" class="form-control shadow-none" placeholder="Ulangi Password">
             </div>
         </div>
         <div class="form-group">

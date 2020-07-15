@@ -32,17 +32,54 @@ class AdminController extends BaseController{
         return view('admin/create_user');
     }
     public function create_user_customer(){
-        return view('admin/create_user_customer');
+        $validation = \Config\Services::validation();
+        $data = ['validation'=>$validation];
+        return view('admin/create_user_customer', $data);
+    }
+    public function create_customer_process(){
+        if(!$this->validate([
+            'nis' => [
+                'rules' => 'required|min_length[5]|is_unique[customers.nis]',
+                'errors' => [
+                    'is_unique' => 'Nis must be unique'
+                ]
+            ],
+            'name' => 'required|min_length[5]',
+            'username' => 'required|min_length[3]',
+            'password' => 'required|min_length[5]',
+            'class' => 'required',
+            'balance' => 'required',
+        ])){
+            $validation = \Config\Services::validation();
+            return redirect()->to('/admin/create_user/customer')->withInput()->with('validation',$validation);
+        }
+        $result = $this->request->getVar();
+        $data = [
+            'nis' => $result['nis'],
+            'full_name' => $result['name'],
+            'username' => $result['username'],
+            'password' => $result['password'],
+            'class' => $result['class'],
+            'balance' => $result['balance'],
+        ];
+        $this->customer->save($data);
+        session()->setFlashdata('success_create','Data berhasil ditambahkan');
+        return redirect()->to('/admin/list_user/customer');
     }
     public function create_user_seller(){
         $validation = \Config\Services::validation();
         $data = ['validation'=>$validation];
         return view('admin/create_user_seller', $data);
-        // dd($validation);
     }
     public function create_seller_process(){
         if(!$this->validate([
             'username' => 'required|min_length[3]',
+            'username' => [
+                'rules'  => 'is_unique[users.username]',
+                'errors' => [
+                    'is_unique' => 'Username has been taken, choose another one'
+                ]
+            ],
             'password' => 'required|min_length[5]',
             'password_confirm'=>'required|matches[password]'
         ])){
@@ -103,6 +140,11 @@ class AdminController extends BaseController{
         $this->user->delete($id);
         session()->setFlashdata('delete_success','Delete user success!');
         return redirect()->to('/admin/list_user/seller');
+    }
+    public function delete_customer($id){
+        $this->customer->delete($id);
+        session()->setFlashdata('delete_success','Delete user success!');
+        return redirect()->to('/admin/list_user/customer');
     }
     // Delete User End
 
