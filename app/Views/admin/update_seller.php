@@ -4,15 +4,19 @@
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="container">
-    <form class="custom-form">
+    <form class="custom-form" action="<?= base_url('/admin/update/seller/process'); ?>" method="POST">
+    <?= csrf_field(); ?>
         <div class="form-group">
-            <input type="text" name="username" class="form-control shadow-none" value="<?= $data['username']; ?>" placeholder="Username" autofocus>
+            <input type="text" name="username" class="form-control <?= ($validation->hasError('username')) ? 'is-invalid' : ''; ?> shadow-none" value="<?= $data['username']; ?>" placeholder="Username" autofocus>
+            <div class="invalid-feedback"><?= $validation->getError('username'); ?></div>
         </div>
         <div class="form-group">
-            <input type="password" name="password" class="form-control shadow-none" placeholder="Password">
+            <input type="password" name="password" class="form-control <?= ($validation->hasError('password')) ? 'is-invalid' : ''; ?> shadow-none" placeholder="Password">
+            <div class="invalid-feedback"><?= $validation->getError('password'); ?></div>
         </div>
         <div class="form-group">
-            <input type="password" name="password_confirm" class="form-control shadow-none" placeholder="Konfirmasi password">
+            <input type="password" name="password_confirm" class="form-control <?= ($validation->hasError('password_confirm')) ? 'is-invalid' : ''; ?> shadow-none" placeholder="Konfirmasi password">
+            <div class="invalid-feedback"><?= $validation->getError('password_confirm'); ?></div>
         </div>
         <div class="text-center mt-4">
             <button type="submit" class="btn btn-success">Buat akun</button>

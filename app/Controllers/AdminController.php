@@ -9,6 +9,7 @@ class AdminController extends BaseController{
         $this->customer = new CustomersModel();
         $this->listcustomer = $this->customer->findalluser();
         $this->listseller = $this->user->findalluser();
+        $this->validation = \Config\Services::validation();
     }
     public function index(){
         // users
@@ -32,9 +33,8 @@ class AdminController extends BaseController{
         return view('admin/create_user');
     }
     public function create_user_customer(){
-        $validation = \Config\Services::validation();
-        $data = ['validation'=>$validation];
-        return view('admin/create_user_customer', $data);
+        $validation = ['validation',$this->validation];
+        return view('admin/create_user_customer', $validation);
     }
     public function create_customer_process(){
         if(!$this->validate([
@@ -44,14 +44,18 @@ class AdminController extends BaseController{
                     'is_unique' => 'Nis must be unique'
                 ]
             ],
+            'username' => [
+                'rules' => 'required|min_length[4]|is_unique[customers.username]',
+                'errors' => [
+                    'is_unique' => 'username must be unique'
+                ]
+            ],
             'name' => 'required|min_length[5]',
-            'username' => 'required|min_length[3]',
             'password' => 'required|min_length[5]',
             'class' => 'required',
             'balance' => 'required',
         ])){
-            $validation = \Config\Services::validation();
-            return redirect()->to('/admin/create_user/customer')->withInput()->with('validation',$validation);
+            return redirect()->to('/admin/create_user/customer')->withInput()->with('validation',$this->validation);
         }
         $result = $this->request->getVar();
         $data = [
@@ -67,9 +71,8 @@ class AdminController extends BaseController{
         return redirect()->to('/admin/list_user/customer');
     }
     public function create_user_seller(){
-        $validation = \Config\Services::validation();
-        $data = ['validation'=>$validation];
-        return view('admin/create_user_seller', $data);
+        $validation = ['validation',$this->validation];
+        return view('admin/create_user_seller', $validation);
     }
     public function create_seller_process(){
         if(!$this->validate([
@@ -83,8 +86,7 @@ class AdminController extends BaseController{
             'password' => 'required|min_length[5]',
             'password_confirm'=>'required|matches[password]'
         ])){
-            $validation = \Config\Services::validation();
-            return redirect()->to('/admin/create_user/seller')->withInput()->with('validation',$validation);
+            return redirect()->to('/admin/create_user/seller')->withInput()->with('validation',$this->validation);
         }
         $result = $this->request->getVar();
         $data = [
@@ -116,15 +118,33 @@ class AdminController extends BaseController{
     // Update User Start
     public function update_seller($id){
         $data = $this->user->finduserid($id);
+        $data = ['data'=>$data,'validation'=>$this->validation];
+        // dd($data);
         return view('admin/update_seller', $data);
     }
     public function update_seller_process(){
+        if(!$this->validate([
+            'username' => [
+                'rules' => 'required|min_length[3]|is_unique[users.username]',
+                'errors' => [
+                    'is_unique' => 'Username has been taken, choose another one'
+                ]
+            ],
+            'password' => 'required|min_length[5]',
+            'password_confirm'=>'required|matches[password]'
+        ])){
+            return redirect()->to('/admin/update/seller')->withInput()->with('validation',$this->validation);
+        }
         $result = $this->request->getVar();
         $data = [
-            'username' =>$result['username'],
-            'password' =>$result['password']
+            'username' => $result['username'],
+            'password' => $result['password'],
+            'role' => "seller",
+            'balance' => 0,
         ];
-        
+        $this->user->save($data);
+        session()->setFlashdata('success_create','Data berhasil ditambahkan');
+        return redirect()->to('/admin/list_user/seller');
     }
     public function update_customer($id){
         $data = $this->customer->finduserid($id);

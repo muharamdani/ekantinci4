@@ -50,9 +50,10 @@ $routes->group('admin', function($routes)
     $routes->get('list_user/customer', 'AdminController::list_user_customer');
     $routes->get('list_user/seller', 'AdminController::list_user_seller');
     // Update USer
-    $routes->get('update/customer/(:num)', 'AdminController::update_customer/$1');
     $routes->get('update/seller/(:num)', 'AdminController::update_seller/$1');
+    $routes->get('update/customer/(:num)', 'AdminController::update_customer/$1');
     $routes->post('update/seller/process','AdminController::update_seller_process');
+    $routes->post('update/customer/process','AdminController::update_customer_process');
     // Delete User
     $routes->get('delete/seller/(:num)', 'AdminController::delete_seller/$1');
     $routes->get('delete/customer/(:num)', 'AdminController::delete_customer/$1');

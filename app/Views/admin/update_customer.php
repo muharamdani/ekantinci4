@@ -23,7 +23,7 @@
             <input type="text" name="class" class="form-control shadow-none" value="<?= $data['class']; ?>" placeholder="Kelas">
         </div>
         <div class="text-center mt-4">
-            <button type="submit" class="btn btn-success">Buat akun</button>
+            <button type="submit" class="btn btn-success">Update akun</button>
         </div>
     </form>
 </div>
