@@ -12,7 +12,7 @@ class CustomersModel extends Model{
     }
     public function finduserid($id){
         $data = $this->find($id);
-        $data = ['data'=>$data];
+        // $data = ['data'=>$data];
         return $data;
     }
 }

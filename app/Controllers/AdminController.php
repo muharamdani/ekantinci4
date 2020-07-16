@@ -33,7 +33,7 @@ class AdminController extends BaseController{
         return view('admin/create_user');
     }
     public function create_user_customer(){
-        $validation = ['validation',$this->validation];
+        $validation = ['validation'=>$this->validation];
         return view('admin/create_user_customer', $validation);
     }
     public function create_customer_process(){
@@ -71,14 +71,13 @@ class AdminController extends BaseController{
         return redirect()->to('/admin/list_user/customer');
     }
     public function create_user_seller(){
-        $validation = ['validation',$this->validation];
+        $validation = ['validation'=>$this->validation];
         return view('admin/create_user_seller', $validation);
     }
     public function create_seller_process(){
         if(!$this->validate([
-            'username' => 'required|min_length[3]',
             'username' => [
-                'rules'  => 'is_unique[users.username]',
+                'rules'  => 'required|min_length[4]|is_unique[users.username]',
                 'errors' => [
                     'is_unique' => 'Username has been taken, choose another one'
                 ]
@@ -119,13 +118,14 @@ class AdminController extends BaseController{
     public function update_seller($id){
         $data = $this->user->finduserid($id);
         $data = ['data'=>$data,'validation'=>$this->validation];
-        // dd($data);
         return view('admin/update_seller', $data);
     }
     public function update_seller_process(){
+        $result = $this->request->getVar();
+        $id = $result['id'];
         if(!$this->validate([
             'username' => [
-                'rules' => 'required|min_length[3]|is_unique[users.username]',
+                'rules'  => 'required|min_length[4]|is_unique[users.username,id,{id}]',
                 'errors' => [
                     'is_unique' => 'Username has been taken, choose another one'
                 ]
@@ -133,22 +133,53 @@ class AdminController extends BaseController{
             'password' => 'required|min_length[5]',
             'password_confirm'=>'required|matches[password]'
         ])){
-            return redirect()->to('/admin/update/seller')->withInput()->with('validation',$this->validation);
+            return redirect()->to("/admin/update/seller/$id")->withInput()->with('validation',$this->validation);
         }
-        $result = $this->request->getVar();
         $data = [
             'username' => $result['username'],
             'password' => $result['password'],
-            'role' => "seller",
-            'balance' => 0,
         ];
-        $this->user->save($data);
-        session()->setFlashdata('success_create','Data berhasil ditambahkan');
+        $this->user->update($id, $data);
+        session()->setFlashdata('success_create','Data berhasil dirubah');
         return redirect()->to('/admin/list_user/seller');
     }
     public function update_customer($id){
         $data = $this->customer->finduserid($id);
+        $data = ['data'=>$data, 'validation'=>$this->validation];
         return view('admin/update_customer', $data);
+    }
+    public function update_customer_process(){
+        $result = $this->request->getVar();
+        $id = $result['id'];
+        if(!$this->validate([
+            'nis' => [
+                'rules' => 'required|min_length[5]|is_unique[customers.nis,id,{id}]',
+                'errors' => [
+                    'is_unique' => 'Nis must be unique'
+                ]
+            ],
+            'username' => [
+                'rules' => 'required|min_length[4]|is_unique[customers.username,id,{id}]',
+                'errors' => [
+                    'is_unique' => 'username must be unique'
+                ]
+            ],
+            'name' => 'required|min_length[5]',
+            'password' => 'required|min_length[5]',
+            'class' => 'required',
+        ])){
+            return redirect()->to("/admin/update/customer/$id")->withInput()->with('validation',$this->validation);
+        }
+        $data = [
+            'nis' => $result['nis'],
+            'full_name' => $result['name'],
+            'username' => $result['username'],
+            'password' => $result['password'],
+            'class' => $result['class'],
+        ];
+        $this->customer->update($id, $data);
+        session()->setFlashdata('success_create','Data berhasil dirubah');
+        return redirect()->to('/admin/list_user/customer');
     }
     // Update User End
     // Delete User
