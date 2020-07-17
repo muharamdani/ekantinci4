@@ -65,6 +65,8 @@ $routes->group('admin', function($routes)
     $routes->get('transaction', 'AdminController::transaction');
     $routes->get('print_card', 'AdminController::print_card');
     $routes->get('add_balance', 'AdminController::add_balance');
+    $routes->get('add_balance/(:num)', 'AdminController::add_balance_id/$1');
+    $routes->post('add_balance/process', 'AdminController::add_balance_process');
 });
 // End Admin
 

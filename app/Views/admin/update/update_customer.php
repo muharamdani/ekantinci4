@@ -12,7 +12,7 @@
             <div class="invalid-feedback"><?= $validation->getError('nis'); ?></div>
         </div>
         <div class="form-group">
-            <input type="text" name="name" class="form-control <?= ($validation->hasError('name')) ? 'is-invalid' : ''; ?> shadow-none" value="<?= $data['name']; ?>" placeholder="Nama Lengkap" required>
+            <input type="text" name="name" class="form-control <?= ($validation->hasError('name')) ? 'is-invalid' : ''; ?> shadow-none" value="<?= $data['full_name']; ?>" placeholder="Nama Lengkap" required>
             <div class="invalid-feedback"><?= $validation->getError('name'); ?></div>
         </div>
         <div class="form-row">

@@ -30,11 +30,11 @@ class AdminController extends BaseController{
     }
     // Create user start
     public function create_user(){
-        return view('admin/create_user');
+        return view('admin/create/create_user');
     }
     public function create_user_customer(){
         $validation = ['validation'=>$this->validation];
-        return view('admin/create_user_customer', $validation);
+        return view('admin/create/create_user_customer', $validation);
     }
     public function create_customer_process(){
         if(!$this->validate([
@@ -72,7 +72,7 @@ class AdminController extends BaseController{
     }
     public function create_user_seller(){
         $validation = ['validation'=>$this->validation];
-        return view('admin/create_user_seller', $validation);
+        return view('admin/create/create_user_seller', $validation);
     }
     public function create_seller_process(){
         if(!$this->validate([
@@ -102,15 +102,13 @@ class AdminController extends BaseController{
 
     // List user start
     public function list_user(){
-        return view('admin/list_user');
+        return view('admin/list/list_user');
     }
     public function list_user_customer(){
-        $data = $this->listcustomer;
-        return view('admin/list_user_customer', $data);
+        return view('admin/list/list_user_customer', $this->listcustomer);
     }
     public function list_user_seller(){
-        $data = $this->listseller;
-        return view('admin/list_user_seller', $data);
+        return view('admin/list/list_user_seller', $this->listseller);
     }
     // List User End
 
@@ -118,7 +116,7 @@ class AdminController extends BaseController{
     public function update_seller($id){
         $data = $this->user->finduserid($id);
         $data = ['data'=>$data,'validation'=>$this->validation];
-        return view('admin/update_seller', $data);
+        return view('admin/update/update_seller', $data);
     }
     public function update_seller_process(){
         $result = $this->request->getVar();
@@ -146,7 +144,7 @@ class AdminController extends BaseController{
     public function update_customer($id){
         $data = $this->customer->finduserid($id);
         $data = ['data'=>$data, 'validation'=>$this->validation];
-        return view('admin/update_customer', $data);
+        return view('admin/update/update_customer', $data);
     }
     public function update_customer_process(){
         $result = $this->request->getVar();
@@ -201,28 +199,39 @@ class AdminController extends BaseController{
 
     // Withdraw start
     public function withdraw(){
-        return view('admin/withdraw');
+        return view('admin/balance/withdraw');
     }
     public function withdraw_customer(){
-        $data = $this->listcustomer;
-        return view('admin/withdraw_customer', $data);
+        return view('admin/balance/withdraw_customer', $this->listcustomer);
     }
     public function withdraw_seller(){
-        $data = $this->listseller;
-        return view('admin/withdraw_seller', $data);
+        return view('admin/balance/withdraw_seller', $this->listseller);
     }
     // Withdraw end
     
     // Other
     public function transaction(){
-        return view('admin/transaction');
+        return view('admin/others/transaction');
     }
     public function print_card(){
-        $data = $this->listcustomer;
-        return view('admin/print_card', $data);
+        return view('admin/others/print_card', $this->listcustomer);
     }
     public function add_balance(){
-        $data = $this->listcustomer;
-        return view('admin/add_balance', $data);
+        return view('admin/balance/add_balance', $this->listcustomer);
+    }
+    public function add_balance_id($id){
+        $data = ['id'=>$id];
+        return view('admin/balance/add_balance_id', $data);
+    }
+    public function add_balance_process(){
+        $data = $this->request->getVar();
+        $id = $data['id'];
+        $balance = $data['balance'];
+        if($balance < 5000){
+            session()->setFlashdata('invalid_balance','Invalid balance!');
+            return redirect()->to("/admin/add_balance/$id");
+        }
+        $this->customer->set("balance","balance+$balance", FALSE)->where('id',$id)->update();
+        return redirect()->to("/admin/add_balance");
     }
 }
