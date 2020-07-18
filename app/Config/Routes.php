@@ -61,6 +61,10 @@ $routes->group('admin', function($routes)
     $routes->get('withdraw', 'AdminController::withdraw');
     $routes->get('withdraw/customer', 'AdminController::withdraw_customer');
     $routes->get('withdraw/seller', 'AdminController::withdraw_seller');
+    $routes->get('withdraw/customer/(:num)', 'AdminController::withdraw_customer_id/$1');
+    $routes->get('withdraw/seller/(:num)', 'AdminController::withdraw_seller_id/$1');
+    $routes->post('withdraw/customer/process', 'AdminController::withdraw_customer_process');
+    $routes->post('withdraw/seller/process', 'AdminController::withdraw_seller_process');
     // Other
     $routes->get('transaction', 'AdminController::transaction');
     $routes->get('print_card', 'AdminController::print_card');

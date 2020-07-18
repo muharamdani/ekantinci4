@@ -20,15 +20,15 @@
           <th scope="col">Aksi</th>
         </tr>
       </thead>
-      <?php foreach($data as $result): ?>
+      <?php $i=1; foreach($data as $result): ?>
       <tbody>
         <tr>
-          <th scope="row">1</th>
+          <th scope="row"><?= $i++ ?></th>
           <td><?= $result['id']; ?></td>
           <td><?= $result['nis']; ?></td>
           <td><?= $result['full_name']; ?></td>
           <td><?= $result['class']; ?></td>
-          <td><?= $result['balance']; ?></td>
+          <td><?= "Rp.",number_format($result['balance'], 0, '.','.'); ?></td>
           <td>
               <a href="<?= base_url('admin/add_balance'); echo '/', $result['id']; ?>"><button class="btn btn-primary">Tambah saldo</button></a>
           </td>

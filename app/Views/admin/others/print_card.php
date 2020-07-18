@@ -16,19 +16,17 @@
           <th scope="col">NIS</th>
           <th scope="col">Nama</th>
           <th scope="col">Kelas</th>
-          <th scope="col">Saldo</th>
           <th scope="col">Aksi</th>
         </tr>
       </thead>
-      <?php foreach($data as $result): ?>
+      <?php $i=1; foreach($data as $result): ?>
       <tbody>
         <tr>
-          <th scope="row">1</th>
+          <th scope="row"><?= $i++ ?></th>
           <td><?= $result['id']; ?></td>
           <td><?= $result['nis']; ?></td>
           <td><?= $result['full_name']; ?></td>
           <td><?= $result['class']; ?></td>
-          <td><?= $result['balance']; ?></td>
           <td>
               <a href="<?= base_url('admin/print_card'); echo '/', $result['id']; ?>"><button class="btn btn-success">Cetak</button></a>
           </td>

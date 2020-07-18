@@ -204,8 +204,52 @@ class AdminController extends BaseController{
     public function withdraw_customer(){
         return view('admin/balance/withdraw_customer', $this->listcustomer);
     }
+    public function withdraw_customer_id($id){
+        $data = ['id'=>$id];
+        return view('admin/balance/withdraw_customer_id', $data);
+    }
+    public function withdraw_customer_process(){
+        $data = $this->request->getVar();
+        $id = $data['id'];
+        $balance_customer = $this->customer->where('id',$id)->select('balance')->first();
+        $balance = $data['balance'];
+        if($balance < 5000){
+            session()->setFlashdata('invalid_balance','Invalid balance!');
+            return redirect()->to("/admin/withdraw/customer/$id");
+        }
+        elseif($balance_customer['balance'] - $balance < 0){
+            session()->setFlashdata('invalid_balance','Saldo tidak cukup!');
+            return redirect()->to("/admin/withdraw/customer/$id");
+        }
+        $this->customer->set("balance","balance-$balance", FALSE)->where('id',$id)->update();
+        return redirect()->to("/admin/withdraw/customer");
+    }
     public function withdraw_seller(){
         return view('admin/balance/withdraw_seller', $this->listseller);
+    }
+    public function withdraw_seller_id($id){
+        $data = ['id'=>$id];
+        if($data['id'] == 1){
+            session()->setFlashdata('admin_error','Error! admin user!');
+            return redirect()->to("/admin/withdraw/seller");
+        }
+        return view('admin/balance/withdraw_seller_id', $data);
+    }
+    public function withdraw_seller_process(){
+        $data = $this->request->getVar();
+        $balance = $data['balance'];
+        $id = $data['id'];
+        $balance_seller = $this->user->where('id',$id)->select('balance')->first();
+        if($balance < 5000){
+            session()->setFlashdata('invalid_balance','Invalid balance!');
+            return redirect()->to("/admin/withdraw/seller/$id");
+        }
+        elseif($balance_seller['balance'] - $balance < 0){
+            session()->setFlashdata('invalid_balance','Saldo tidak cukup!');
+            return redirect()->to("/admin/withdraw/seller/$id");
+        }
+        $this->user->set("balance","balance-$balance", FALSE)->where('id',$id)->update();
+        return redirect()->to("/admin/withdraw/seller");
     }
     // Withdraw end
     

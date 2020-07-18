@@ -31,7 +31,7 @@
                     Total Saldo Penjual
                 </div>
                 <div class="card-body card-body-3">
-                    <h5 class="card-title"><?= $sellerbalance; ?></h5>
+                <h5 class="card-title"><?= "Rp.",number_format($sellerbalance, 0, '.','.'); ?></h5>
                 </div>
             </div>
         </div>
@@ -41,7 +41,7 @@
                     Total Saldo Pelanggan
                 </div>
                 <div class="card-body card-body-4">
-                    <h5 class="card-title"><?= $customerbalance ?></h5>
+                    <h5 class="card-title"><?= "Rp.",number_format($customerbalance, 0, '.','.'); ?></h5>
                 </div>
             </div>
         </div>

@@ -20,17 +20,17 @@
           <th scope="col">Aksi</th>
         </tr>
       </thead>
-      <?php foreach($data as $result): ?>
+      <?php $i=1; foreach($data as $result): ?>
       <tbody>
         <tr>
-          <th scope="row">1</th>
+          <th scope="row"><?= $i++ ?></th>
           <td><?= $result['id']; ?></td>
           <td><?= $result['nis']; ?></td>
           <td><?= $result['full_name']; ?></td>
           <td><?= $result['class']; ?></td>
           <td><?= $result['balance']; ?></td>
           <td>
-              <a href="<?= base_url('admin/withdraw'); echo '/', $result['id']; ?>"><button class="btn btn-primary">Tarik</button></a>
+              <a href="<?= base_url('admin/withdraw/customer'); echo '/', $result['id']; ?>"><button class="btn btn-primary">Tarik</button></a>
           </td>
         </tr>
       </tbody>

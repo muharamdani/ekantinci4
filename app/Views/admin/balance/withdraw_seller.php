@@ -7,6 +7,9 @@
   <form action="" class="mb-3">
       <input type="text" name="" placeholder="Search" autofocus>
   </form>
+  <?php if(session()->getFlashdata('admin_error')):?>
+    <div class="alert alert-danger" role="alert"><?= session()->getFlashdata('admin_error') ?></div>
+  <?php endif;?>
   <div class="table-responsive">
     <table class="table text-center">
       <thead class="thead-dark">

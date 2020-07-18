@@ -33,7 +33,7 @@
           <th scope="row"><?= $i++ ?></th>
           <td><?= $result['id']; ?></td>
           <td><?= $result['username']; ?></td>
-          <td><?= $result['balance']; ?></td>
+          <td><?= "Rp.",number_format($result['balance'], 0, '.','.'); ?></td>
           <td>
             <a href="<?= base_url('admin/update/seller'); echo '/', $result['id']; ?>"><button class="btn btn-primary">Update</button></a>
             <a href="<?= base_url('admin/delete/seller'); echo '/', $result['id']; ?>"><button class="btn btn-danger">DELETE</button></a>
