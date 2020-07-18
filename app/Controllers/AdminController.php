@@ -45,13 +45,13 @@ class AdminController extends BaseController{
                 ]
             ],
             'username' => [
-                'rules' => 'required|min_length[4]|is_unique[customers.username]',
+                'rules' => 'required|alpha_dash|min_length[4]|is_unique[customers.username]',
                 'errors' => [
                     'is_unique' => 'username must be unique'
                 ]
             ],
             'name' => 'required|min_length[5]',
-            'password' => 'required|min_length[5]',
+            'password' => 'required|alpha_dash|min_length[5]',
             'class' => 'required',
             'balance' => 'required',
         ])){
@@ -77,13 +77,13 @@ class AdminController extends BaseController{
     public function create_seller_process(){
         if(!$this->validate([
             'username' => [
-                'rules'  => 'required|min_length[4]|is_unique[users.username]',
+                'rules'  => 'required|alpha_dash|min_length[4]|is_unique[users.username]',
                 'errors' => [
                     'is_unique' => 'Username has been taken, choose another one'
                 ]
             ],
-            'password' => 'required|min_length[5]',
-            'password_confirm'=>'required|matches[password]'
+            'password' => 'required|alpha_dash|min_length[5]',
+            'password_confirm'=>'required|alpha_dash|matches[password]'
         ])){
             return redirect()->to('/admin/create_user/seller')->withInput()->with('validation',$this->validation);
         }
@@ -123,13 +123,13 @@ class AdminController extends BaseController{
         $id = $result['id'];
         if(!$this->validate([
             'username' => [
-                'rules'  => 'required|min_length[4]|is_unique[users.username,id,{id}]',
+                'rules'  => 'required|alpha_dash|min_length[4]|is_unique[users.username,id,{id}]',
                 'errors' => [
                     'is_unique' => 'Username has been taken, choose another one'
                 ]
             ],
-            'password' => 'required|min_length[5]',
-            'password_confirm'=>'required|matches[password]'
+            'password' => 'required|alpha_dash|min_length[5]',
+            'password_confirm'=>'required|alpha_dash|matches[password]'
         ])){
             return redirect()->to("/admin/update/seller/$id")->withInput()->with('validation',$this->validation);
         }
@@ -157,13 +157,13 @@ class AdminController extends BaseController{
                 ]
             ],
             'username' => [
-                'rules' => 'required|min_length[4]|is_unique[customers.username,id,{id}]',
+                'rules' => 'required|alpha_dash|min_length[4]|is_unique[customers.username,id,{id}]',
                 'errors' => [
                     'is_unique' => 'username must be unique'
                 ]
             ],
             'name' => 'required|min_length[5]',
-            'password' => 'required|min_length[5]',
+            'password' => 'required|alpha_dash|min_length[5]',
             'class' => 'required',
         ])){
             return redirect()->to("/admin/update/customer/$id")->withInput()->with('validation',$this->validation);
