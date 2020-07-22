@@ -1,15 +1,25 @@
 <?php namespace App\Controllers;
 
+use App\Models\BalanceModel;
 use App\Models\CustomersModel;
+use App\Models\DeleteModel;
+use App\Models\TransactionModel;
+use App\Models\UpdateModel;
 use App\Models\UsersModel;
 
 class AdminController extends BaseController{
     public function __construct(){
         $this->user = new UsersModel();
         $this->customer = new CustomersModel();
+        $this->updatemodel = new UpdateModel();
+        $this->deletemodel = new DeleteModel();
+        $this->balancemodel = new BalanceModel();
+        $this->transactionmodel = new TransactionModel();
         $this->listcustomer = $this->customer->findalluser();
         $this->listseller = $this->user->findalluser();
         $this->validation = \Config\Services::validation();
+        date_default_timezone_set('Asia/Jakarta');
+        $this->now = date('Y-m-d H:i:s');
     }
     public function index(){
         // users
@@ -59,12 +69,13 @@ class AdminController extends BaseController{
         }
         $result = $this->request->getVar();
         $data = [
-            'nis' => $result['nis'],
-            'full_name' => $result['name'],
-            'username' => $result['username'],
-            'password' => $result['password'],
-            'class' => $result['class'],
-            'balance' => $result['balance'],
+            'nis' => htmlspecialchars($result['nis']),
+            'full_name' => htmlspecialchars($result['name']),
+            'username' => htmlspecialchars($result['username']),
+            'password' => password_hash($result['password'], PASSWORD_DEFAULT),
+            'class' => htmlspecialchars($result['class']),
+            'balance' => htmlspecialchars($result['balance']),
+            'timestamp'=>$this->now
         ];
         $this->customer->save($data);
         session()->setFlashdata('success_create','Data berhasil ditambahkan');
@@ -83,16 +94,17 @@ class AdminController extends BaseController{
                 ]
             ],
             'password' => 'required|alpha_dash|min_length[5]',
-            'password_confirm'=>'required|alpha_dash|matches[password]'
+            'password_confirm'=>'required|alpha_dash|matches[password]',
         ])){
             return redirect()->to('/admin/create_user/seller')->withInput()->with('validation',$this->validation);
         }
         $result = $this->request->getVar();
         $data = [
-            'username' => $result['username'],
-            'password' => $result['password'],
+            'username' => htmlspecialchars($result['username']),
+            'password' => password_hash($result['password'], PASSWORD_DEFAULT),
             'role' => "seller",
             'balance' => 0,
+            'timestamp'=>$this->now
         ];
         $this->user->save($data);
         session()->setFlashdata('success_create','Data berhasil ditambahkan');
@@ -134,10 +146,15 @@ class AdminController extends BaseController{
             return redirect()->to("/admin/update/seller/$id")->withInput()->with('validation',$this->validation);
         }
         $data = [
-            'username' => $result['username'],
-            'password' => $result['password'],
+            'username' => htmlspecialchars($result['username']),
+            'password' => password_hash($result['password'], PASSWORD_DEFAULT),
+        ];
+        $dataupdate = [
+            'sellers_id'=>$id,
+            'timestamp'=>$this->now,
         ];
         $this->user->update($id, $data);
+        $this->updatemodel->save($dataupdate);
         session()->setFlashdata('success_create','Data berhasil dirubah');
         return redirect()->to('/admin/list_user/seller');
     }
@@ -169,13 +186,19 @@ class AdminController extends BaseController{
             return redirect()->to("/admin/update/customer/$id")->withInput()->with('validation',$this->validation);
         }
         $data = [
-            'nis' => $result['nis'],
-            'full_name' => $result['name'],
-            'username' => $result['username'],
-            'password' => $result['password'],
-            'class' => $result['class'],
+            'nis' => htmlspecialchars($result['nis']),
+            'full_name' => htmlspecialchars($result['name']),
+            'username' => htmlspecialchars($result['username']),
+            'password' => password_hash($result['password'], PASSWORD_DEFAULT),
+            'class' => htmlspecialchars($result['class']),
+            'timestamp'=>$this->now
+        ];
+        $dataupdate = [
+            'customers_id'=>$id,
+            'timestamp'=>$this->now,
         ];
         $this->customer->update($id, $data);
+        $this->updatemodel->save($dataupdate);
         session()->setFlashdata('success_create','Data berhasil dirubah');
         return redirect()->to('/admin/list_user/customer');
     }
@@ -186,11 +209,21 @@ class AdminController extends BaseController{
             session()->setFlashdata('error_admin','Cannot delete user admin!');
             return redirect()->to('/admin/list_user/seller');
         }
+        $dataupdate = [
+            'sellers_id'=>$id,
+            'timestamp'=>$this->now,
+        ];
+        $this->deletemodel->save($dataupdate);
         $this->user->delete($id);
         session()->setFlashdata('delete_success','Delete user success!');
         return redirect()->to('/admin/list_user/seller');
     }
     public function delete_customer($id){
+        $dataupdate = [
+            'customers_id'=>$id,
+            'timestamp'=>$this->now,
+        ];
+        $this->deletemodel->save($dataupdate);
         $this->customer->delete($id);
         session()->setFlashdata('delete_success','Delete user success!');
         return redirect()->to('/admin/list_user/customer');
@@ -221,6 +254,12 @@ class AdminController extends BaseController{
             session()->setFlashdata('invalid_balance','Saldo tidak cukup!');
             return redirect()->to("/admin/withdraw/customer/$id");
         }
+        $dataupdate = [
+            'customers_id'=>$id,
+            'withdraw_balance'=>$balance,
+            'timestamp'=>$this->now,
+        ];
+        $this->balancemodel->save($dataupdate);
         $this->customer->set("balance","balance-$balance", FALSE)->where('id',$id)->update();
         return redirect()->to("/admin/withdraw/customer");
     }
@@ -248,6 +287,12 @@ class AdminController extends BaseController{
             session()->setFlashdata('invalid_balance','Saldo tidak cukup!');
             return redirect()->to("/admin/withdraw/seller/$id");
         }
+        $dataupdate = [
+            'sellers_id'=>$id,
+            'withdraw_balance'=>$balance,
+            'timestamp'=>$this->now,
+        ];
+        $this->balancemodel->save($dataupdate);
         $this->user->set("balance","balance-$balance", FALSE)->where('id',$id)->update();
         return redirect()->to("/admin/withdraw/seller");
     }
@@ -275,6 +320,12 @@ class AdminController extends BaseController{
             session()->setFlashdata('invalid_balance','Invalid balance!');
             return redirect()->to("/admin/add_balance/$id");
         }
+        $dataupdate = [
+            'customers_id'=>$id,
+            'add_balance'=>$balance,
+            'timestamp'=>$this->now,
+        ];
+        $this->balancemodel->save($dataupdate);
         $this->customer->set("balance","balance+$balance", FALSE)->where('id',$id)->update();
         return redirect()->to("/admin/add_balance");
     }

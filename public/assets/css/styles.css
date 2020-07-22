@@ -167,7 +167,7 @@ input[type=text]:focus,input[type=number]:focus,input[type=password]:focus{
   .sidebar-top{
     width: auto;
     height: 33.5vh;
-    background-image: url("../img/food.jpg");
+    /* background-image: url("../img/food.jpg"); */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

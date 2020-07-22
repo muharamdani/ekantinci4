@@ -28,7 +28,7 @@
           <td><?= $result['nis']; ?></td>
           <td><?= $result['full_name']; ?></td>
           <td><?= $result['class']; ?></td>
-          <td><?= $result['balance']; ?></td>
+          <td><?= "Rp.",number_format($result['balance'], 0, '.','.'); ?></td>
           <td>
               <a href="<?= base_url('admin/withdraw/customer'); echo '/', $result['id']; ?>"><button class="btn btn-primary">Tarik</button></a>
           </td>

@@ -27,7 +27,7 @@
           <th scope="row"><?= $i++ ?></th>
           <td><?= $result['id']; ?></td>
           <td><?= $result['username']; ?></td>
-          <td><?= $result['balance']; ?></td>
+          <td><?= "Rp.",number_format($result['balance'], 0, '.','.'); ?></td>
           <td>
               <a href="<?= base_url('admin/withdraw/seller'); echo '/', $result['id']; ?>"><button class="btn btn-primary">Tarik</button></a>
           </td>
