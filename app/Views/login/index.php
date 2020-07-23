@@ -19,14 +19,21 @@
                 <div class="m-auto w-lg-75 w-xl-50">
                     <h2 class="text-info font-weight-light"><i class="fa fa-diamond"></i>E-kantin</h2>
                     <p>Make canteen transaction easier</p>
-                    <form>
+                    <?php if(session()->getFlashdata('errorpassword')): ?>
+                        <div class="alert alert-danger" role="alert"><?= session()->getFlashdata('errorpassword') ?></div>
+                    <?php endif; ?>
+                    <?php if(session()->getFlashdata('errorboth')): ?>
+                        <div class="alert alert-danger" role="alert"><?= session()->getFlashdata('errorboth') ?></div>
+                    <?php endif; ?>
+                    <form action="<?= base_url('/login_process'); ?>" method="POST">
+                    <?= csrf_field(); ?>
                         <div class="form-group">
                             <label class="text-secondary">Username</label>
-                            <input class="form-control" type="text" required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}$" autofocus>
+                            <input class="form-control" type="text" name="username" value="<?= old('username'); ?>" required autofocus>
                         </div>
                         <div class="form-group">
                             <label class="text-secondary">Password</label>
-                            <input class="form-control" type="password" required="">
+                            <input class="form-control" type="password" name="password" value="<?= old('password'); ?>" required="">
                         </div>
                         <button class="btn btn-info mt-2" type="submit">Log In</button>
                     </form>

@@ -30,10 +30,12 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/logout', 'AuthController::logout');
 $routes->get('/', 'AuthController::index');
 $routes->addRedirect('login', '/');
-$routes->get('register', 'AuthController::register');
+$routes->post('login_process', 'AuthController::login_process');
+$routes->get('/cek', 'AuthController::cek');
+$routes->get('/logout', 'AuthController::logout');
+// $routes->get('register', 'AuthController::register');
 // Admin
 $routes->group('admin', function($routes)
 {
