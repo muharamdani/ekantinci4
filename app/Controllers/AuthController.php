@@ -31,7 +31,7 @@ class AuthController extends BaseController{
                 }
                 elseif($user['role']=='seller'){
                     session()->set(['username'=>$user['username'],'role'=>'seller']);
-                    return session()->get('username');
+                    return redirect()->to('/seller');
                 }
             }
             else{
@@ -42,7 +42,7 @@ class AuthController extends BaseController{
         elseif($user2){
             if(password_verify($password,$user2['password'])){
                 session()->set(['username'=>$user2['username'],'role'=>'customer']);
-                return session()->get('username');
+                return redirect()->to('/customer');
             }
             else{
                 session()->setFlashdata('errorpassword','Wrong Password');
@@ -55,8 +55,9 @@ class AuthController extends BaseController{
         }
     }
     public function logout(){
-        session()->destroy();
-        return "Has been logut";
+        session()->remove(['role','username']);
+        session()->setFlashdata('logoutsuccess','You have been logged out :)');
+        return redirect()->to('/')->withInput();
     }
     public function cek(){
         echo session()->get('username');

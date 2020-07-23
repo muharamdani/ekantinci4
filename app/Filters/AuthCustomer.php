@@ -4,11 +4,18 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
 
-class Auth implements FilterInterface
+class AuthCustomer implements FilterInterface
 {
     public function before(RequestInterface $request)
     {
-        
+        if(session()->get('role')!=='customer'){
+            if(session()->get('role')=='admin'){
+                return redirect()->to('/admin');
+            }
+            elseif(session()->get('role')=='customer'){
+                return redirect()->to('/customer');
+            }
+        }
     }
 
     //--------------------------------------------------------------------

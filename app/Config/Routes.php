@@ -37,7 +37,7 @@ $routes->get('/cek', 'AuthController::cek');
 $routes->get('/logout', 'AuthController::logout');
 // $routes->get('register', 'AuthController::register');
 // Admin
-$routes->group('admin', function($routes)
+$routes->group('admin', ['filter'=>'authadmin'], function($routes)
 {
     // GET
     // Create user
@@ -77,7 +77,7 @@ $routes->group('admin', function($routes)
 // End Admin
 
 // Seller
-$routes->group('seller', function($routes)
+$routes->group('seller', ['filter'=>'authseller'],function($routes)
 {
     // GET
     $routes->get('/', 'SellerController::index');
@@ -91,7 +91,7 @@ $routes->group('seller', function($routes)
 // End Seller
 
 // Customer
-$routes->group('customer', function($routes)
+$routes->group('customer', ['filter'=>'authcustomer'], function($routes)
 {
     // GET
     $routes->get('/', 'CustomerController::index');

@@ -10,6 +10,9 @@ class Filters extends BaseConfig
 		'csrf'     => \CodeIgniter\Filters\CSRF::class,
 		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
+		'authadmin' => \App\Filters\AuthAdmin::class,
+		'authseller' => \App\Filters\AuthSeller::class,
+		'authcustomer' => \App\Filters\AuthCustomer::class,
 	];
 
 	// Always applied before every request
@@ -17,6 +20,7 @@ class Filters extends BaseConfig
 		'before' => [
 			//'honeypot'
 			// 'csrf',
+			// 'auth' => ['except' => ['/','/cek']],
 		],
 		'after'  => [
 			'toolbar',

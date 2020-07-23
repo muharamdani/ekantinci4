@@ -25,6 +25,9 @@
                     <?php if(session()->getFlashdata('errorboth')): ?>
                         <div class="alert alert-danger" role="alert"><?= session()->getFlashdata('errorboth') ?></div>
                     <?php endif; ?>
+                    <?php if(session()->getFlashdata('logoutsuccess')): ?>
+                        <div class="alert alert-success" role="alert"><?= session()->getFlashdata('logoutsuccess') ?></div>
+                    <?php endif; ?>
                     <form action="<?= base_url('/login_process'); ?>" method="POST">
                     <?= csrf_field(); ?>
                         <div class="form-group">
