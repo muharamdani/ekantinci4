@@ -56,11 +56,11 @@
             <div class="rolename text-center">
                 <?= $this->renderSection('rolename') ?>
             </div>
-            <section class="middle">
-            <?= $this->renderSection('content') ?>
-            </section>
              <!-- End Content -->
         </div>
+        <section class="middle">
+            <?= $this->renderSection('content') ?>
+        </section>
         <div class="bottomnya">
             <div class="footer">
                 <h8>Copyright <i class="fa fa-copyright"></i> Ramdani</h8>

@@ -57,7 +57,7 @@
         </div>
         <section class="middle">
                 <?= $this->renderSection('content') ?>
-            </section>
+        </section>
         <div class="bottomnya">
             <div class="footer">
                 <h8>Copyright <i class="fa fa-copyright"></i> Ramdani</h8>

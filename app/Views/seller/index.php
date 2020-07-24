@@ -11,7 +11,7 @@
                     Total transaksi berhasil
                 </div>
                 <div class="card-body card-body-1">
-                    <h5 class="card-title">{sum-number-of-transaction}</h5>
+                    <h5 class="card-title"><?= $usertransaction; ?></h5>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                     Total saldo anda
                 </div>
                 <div class="card-body card-body-2">
-                    <h5 class="card-title">{sum-number-of-ballance}</h5>
+                    <h5 class="card-title"><?= "Rp.",number_format($userbalance, 0, '.','.'); ?></h5>
                 </div>
             </div>
         </div>

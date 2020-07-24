@@ -20,17 +20,19 @@
           <th scope="col">Waktu</th>
         </tr>
       </thead>
+      <?php $i=1; foreach($data as $result): ?>
       <tbody>
         <tr>
-          <th scope="row">1</th>
-          <td>Edit ID</td>
-          <td>Edit NIS</td>
-          <td>Edit Name</td>
-          <td>Edit Penjual</td>
-          <td>Edit Balance</td>
-          <td>Timestamps</td>
+          <th scope="row"><?= $i++; ?></th>
+          <td><?= $result['id']; ?></td>
+          <td><?= $result['nis']; ?></td>
+          <td><?= $result['full_name']; ?></td>
+          <td><?= $result['username']; ?></td>
+          <td><?= "Rp.",number_format($result['balance'], 0, '.','.'); ?></td>
+          <td><?= $result['timestamp']; ?></td>
         </tr>
       </tbody>
+      <?php endforeach; ?>
     </table>
   </div>
 </div>

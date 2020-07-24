@@ -2,6 +2,7 @@
 
 use App\Models\CustomersModel;
 use App\Models\TransactionModel;
+use App\Models\UpdateModel;
 use App\Models\UsersModel;
 
 class SellerController extends BaseController{
@@ -9,11 +10,18 @@ class SellerController extends BaseController{
         $this->usermodel = new UsersModel();
         $this->customermodel = new CustomersModel();
         $this->transactionmodel = new TransactionModel();
+        $this->updatemodel = new UpdateModel();
         date_default_timezone_set('Asia/Jakarta');
         $this->now = date('Y-m-d H:i:s');
     }
     public function index(){
-        return view('seller/index');
+        $userbalance = $this->usermodel->select('id,balance')->where('username',session()->get('username'))->first();
+        $usertransaction = $this->transactionmodel->selectCount('id')->where('sellers_id',$userbalance['id'])->first();
+        $data = [
+            'userbalance'=>$userbalance['balance'],
+            'usertransaction'=>$usertransaction['id'],
+        ];
+        return view('seller/index',$data);
     }
     public function transaction(){
         return view('seller/transaction');
@@ -74,13 +82,52 @@ class SellerController extends BaseController{
     }
 
     public function transaction_history(){
-        return view('seller/transaction_history');
+        $transaction = $this->transactionmodel
+                        ->select('transactions.id,customers.id,customers.nis,customers.full_name,users.username,transactions.balance,transactions.timestamp')
+                        ->join('customers','transactions.customers_id = customers.id')
+                        ->join('users','transactions.sellers_id = users.id')
+                        ->where('users.username',session()
+                        ->get('username'))
+                        ->findAll();
+        $data = ['data'=>$transaction];
+        return view('seller/transaction_history',$data);
     }
     public function balance_history(){
         return "edit";
     }
     public function change_profile(){
-        return view('seller/change_profile');
+        $data = $this->usermodel->select('id,username')->where('username',session()->get('username'))->first();
+        $data = ['data'=>$data,'validation'=>\Config\Services::validation()];
+        return view('seller/change_profile',$data);
+    }
+    public function change_profile_process(){
+        $result = $this->request->getVar();
+        $id = $result['id'];
+        if(!$this->validate([
+            'username' => [
+                'rules'  => 'required|alpha_dash|min_length[4]|is_unique[users.username,id,{id}]',
+                'errors' => [
+                    'is_unique' => 'Username has been taken, choose another one'
+                ]
+            ],
+            'password' => 'required|alpha_dash|min_length[5]',
+            'password_confirm'=>'required|alpha_dash|matches[password]'
+        ])){
+            return redirect()->to("/seller/change_profile")->withInput()->with('validation',\Config\Services::validation());
+        }
+        $data = [
+            'username' => htmlspecialchars($result['username']),
+            'password' => password_hash($result['password'], PASSWORD_DEFAULT),
+        ];
+        $dataupdate = [
+            'sellers_id'=>$id,
+            'timestamp'=>$this->now,
+        ];
+        session()->set('username',$data['username']);
+        $this->usermodel->update($id, $data);
+        $this->updatemodel->save($dataupdate);
+        session()->setFlashdata('success_create','Data berhasil dirubah');
+        return redirect()->to('/seller');
     }
     public function print_card(){
         return "edit";

@@ -91,6 +91,7 @@ $routes->group('seller', ['filter'=>'authseller'],function($routes)
     $routes->get('transaction_history', 'SellerController::transaction_history');
     $routes->get('balance_history', 'SellerController::balance_history');
     $routes->get('change_profile', 'SellerController::change_profile');
+    $routes->post('change_profile/process', 'SellerController::change_profile_process');
     $routes->get('print_card', 'SellerController::print_card');
     // POST
 });
@@ -104,6 +105,7 @@ $routes->group('customer', ['filter'=>'authcustomer'], function($routes)
     $routes->get('transaction_history', 'CustomerController::transaction_history');
     $routes->get('balance_history', 'CustomerController::balance_history');
     $routes->get('change_profile', 'CustomerController::change_profile');
+    $routes->post('change_profile/process', 'CustomerController::change_profile_process');
     $routes->get('print_card', 'CustomerController::print_card');
     // POST
 });
