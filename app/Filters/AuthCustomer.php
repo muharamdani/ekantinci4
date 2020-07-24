@@ -8,13 +8,18 @@ class AuthCustomer implements FilterInterface
 {
     public function before(RequestInterface $request)
     {
-        if(session()->get('role')!=='customer'){
-            if(session()->get('role')=='admin'){
-                return redirect()->to('/admin');
+        if(session()->has('role') && session()->has('username')){
+            if(session()->get('role')!=='customer'){
+                if(session()->get('role')=='admin'){
+                    return redirect()->to('/admin');
+                }
+                elseif(session()->get('role')=='seller'){
+                    return redirect()->to('/seller');
+                }
             }
-            elseif(session()->get('role')=='customer'){
-                return redirect()->to('/customer');
-            }
+        }
+        else{
+            return redirect()->to('/');
         }
     }
 

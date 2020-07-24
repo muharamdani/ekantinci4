@@ -8,13 +8,18 @@ class AuthSeller implements FilterInterface
 {
     public function before(RequestInterface $request)
     {
-        if(session()->get('role')!=='seller'){
-            if(session()->get('role')=='admin'){
-                return redirect()->to('/admin');
+        if(session()->has('role') && session()->has('username')){
+            if(session()->get('role')!=='seller'){
+                if(session()->get('role')=='admin'){
+                    return redirect()->to('/admin');
+                }
+                elseif(session()->get('role')=='customer'){
+                    return redirect()->to('/customer');
+                }
             }
-            elseif(session()->get('role')=='customer'){
-                return redirect()->to('/customer');
-            }
+        }
+        else{
+            return redirect()->to('/');
         }
     }
 

@@ -8,13 +8,17 @@ class AuthAdmin implements FilterInterface
 {
     public function before(RequestInterface $request)
     {
-        if(session()->get('role')!=='admin'){
-            if(session()->get('role')=='seller'){
-                return redirect()->to('/seller');
+        if(session()->has('role') && session()->has('username')){
+            if(session()->get('role')!=='admin'){
+                if(session()->get('role')=='seller'){
+                    return redirect()->to('/seller');
+                }
+                elseif(session()->get('role')=='customer'){
+                    return redirect()->to('/customer');
+                }
             }
-            elseif(session()->get('role')=='customer'){
-                return redirect()->to('/customer');
-            }
+        }else{
+            return redirect()->to('/');
         }
     }
 

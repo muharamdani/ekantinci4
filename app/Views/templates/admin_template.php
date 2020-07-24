@@ -16,7 +16,7 @@
     <div id="mySidebar" class="sidebar">
         <div class="sidebar-top text-white">
             <img src="<?= base_url("assets/img/avatar.png"); ?>" alt="" class="userphoto">
-            <p>Welcome back,<br>{username}</p>
+            <p>Welcome back,<br><?= session()->get('username'); ?></p>
         </div>
         <div class="sidebar-bottom">
             <ul class="list-group my-1">

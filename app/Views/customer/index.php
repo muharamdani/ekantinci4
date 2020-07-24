@@ -1,6 +1,6 @@
 <?= $this->extend('templates/customer_template') ?>
 <?= $this->section('rolename') ?>
-    <h1>Selamat datang {username}</h1>
+    <h1>Selamat datang <?= session()->get('username'); ?></h1>
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="container-fluid">

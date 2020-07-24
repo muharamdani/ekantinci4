@@ -82,6 +82,12 @@ $routes->group('seller', ['filter'=>'authseller'],function($routes)
     // GET
     $routes->get('/', 'SellerController::index');
     $routes->get('transaction', 'SellerController::transaction');
+    $routes->post('transaction/process', 'SellerController::transaction_process');
+
+    $routes->get('transaction/payment', 'SellerController::payment');
+    $routes->post('transaction/payment/process', 'SellerController::payment_process');
+    $routes->get('transaction/done', 'SellerController::payment_done');
+
     $routes->get('transaction_history', 'SellerController::transaction_history');
     $routes->get('balance_history', 'SellerController::balance_history');
     $routes->get('change_profile', 'SellerController::change_profile');

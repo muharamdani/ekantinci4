@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="<?= base_url("assets/fonts/font-awesome.min.css"); ?>">
     <link rel="stylesheet" href="<?= base_url("assets/fonts/ionicons.min.css"); ?>">
     <link rel="stylesheet" href="<?= base_url("assets/css/Collapsible-sidebar-left-or-right--Content-overlay.css"); ?>">
-    <!-- <link rel="stylesheet" href="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.css"> -->
     <link rel="stylesheet" href="<?= base_url("assets/css/bootstrap-better-nav.min.css"); ?>">
     <link rel="stylesheet" href="<?= base_url("assets/css/styles.css"); ?>">
 </head>
@@ -18,7 +17,7 @@
     <div id="mySidebar" class="sidebar">
         <div class="sidebar-top text-white">
             <img src="<?= base_url("assets/img/avatar.png"); ?>" alt="" class="userphoto">
-            <p>Welcome back,<br>{username}</p>
+            <p>Welcome back,<br><?= session()->get('username'); ?></p>
         </div>
         <div class="sidebar-bottom">
             <ul class="list-group">
@@ -54,11 +53,11 @@
             <div class="rolename text-center">
                 <?= $this->renderSection('rolename') ?>
             </div>
-            <section class="middle">
-            <?= $this->renderSection('content') ?>
-            </section>
              <!-- End Content -->
         </div>
+        <section class="middle">
+                <?= $this->renderSection('content') ?>
+            </section>
         <div class="bottomnya">
             <div class="footer">
                 <h8>Copyright <i class="fa fa-copyright"></i> Ramdani</h8>

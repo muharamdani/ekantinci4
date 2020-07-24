@@ -56,12 +56,12 @@ class AuthController extends BaseController{
     }
     public function logout(){
         session()->remove(['role','username']);
+        // session()->destroy();
         session()->setFlashdata('logoutsuccess','You have been logged out :)');
         return redirect()->to('/')->withInput();
     }
     public function cek(){
-        echo session()->get('username');
-        echo session()->get('role');
+        dd(session()->get());
     }
     public function register(){
         return view("register/index");
