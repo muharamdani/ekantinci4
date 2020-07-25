@@ -81,6 +81,6 @@ class CustomerController extends BaseController{
         return redirect()->to('/customer');
     }
     public function print_card(){
-        return "print";
+        return "Cetak kartu sementara belum aktif";
     }
 }

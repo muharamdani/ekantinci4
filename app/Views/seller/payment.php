@@ -12,14 +12,12 @@
         <?php if(session()->getFlashdata('minusbalance')): ?>
             <div class="alert alert-danger" role="alert"><?= session()->getFlashdata('minusbalance') ?></div>
         <?php endif; ?>
+        <p>Pembayaran menggunakan kartu untuk sementara tidak aktif</p>
         <div class="form-group">
             <input type="number" name="nis" class="form-control shadow-none" placeholder="Masukkan NIS" autofocus>
         </div>
         <div class="text-center mt-4">
             <button type="submit" class="btn btn-success">Submit</button>
-        </div>
-        <div class="text-center mt-4">
-            <button type="submit" name="cash" class="btn btn-success">Tunai</button>
         </div>
     </form>
 </div>
